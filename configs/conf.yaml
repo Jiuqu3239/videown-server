@@ -1,0 +1,48 @@
+Server:
+  # debug or release
+  RunMode: debug
+  HttpPort: 5001
+  ReadTimeout: 10
+  WriteTimeout: 10
+
+App:
+  DefaultPageSize: 10
+  MaxPageSize: 100
+  LogSavePath: storage/logs
+  LogFileName: app
+  LogFileExt: .log
+  CmpHttpUrl: http://192.168.14.211:8081/file-state/
+  Username: admin
+  Password: nGG*NkT9EsaBQa
+
+  JwtSecret: W04R[W]1$Fj<F4E8
+  # access token duration, by seconds
+  JwtDuration: 72000
+  StaticPath: static
+  Limiter:
+    IsOpen: false
+    Gap: 2
+    Count: 100
+
+Database:
+  DBType: mysql
+  Username: root
+  Password: xzy888886
+  Host: localhost:3306
+  DBName: videown
+  Charset: utf8mb4
+  ParseTime: true
+
+Redis:
+  AddressPort: 127.0.0.1:6379
+  Password: "" # Password (null)
+  DefaultDB: 0 # default DB
+  DialTimeout: 5s #redis timeout, default 5s
+
+Web3:
+  RpcEndpoints:
+    - ws://192.168.14.211:9944/
+    #- wss://testnet-rpc0.cess.cloud/ws/
+  ChainId: 80001
+  Mnemonic: "hire useless peanut engine amused fuel wet toddler list party salmon dream"
+  SupperAddress: "cXisZ8kRMxWmjHsuwYFd6SWCxskZyRyCRfLVxznXMEr8sXebA"
