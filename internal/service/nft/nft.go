@@ -104,6 +104,9 @@ func UpdateForMint(filehash string, data TxData) (dto.EventResp, error) {
 		return res, errors.New("query nft metadata error")
 	}
 	nft = &resp[0]
+	if nft.FileStatus != model.STORAGE.String() {
+		return res, errors.New("video source file is pending,please wait a moment and try again")
+	}
 	//create activity
 	nftEvent := &model.Activity{
 		EventType: model.ACT_MINT.String(),
