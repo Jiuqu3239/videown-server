@@ -1,6 +1,8 @@
 package model
 
 import (
+	"errors"
+
 	"gorm.io/gorm"
 )
 
@@ -99,7 +101,10 @@ func (t *VideoMetadata) Update(db *gorm.DB) error {
 }
 
 func (t *VideoMetadata) Delete(db *gorm.DB) error {
-	tx := db.Update("is_deleted", true)
+	if t.FileHash == "" {
+		return errors.New("empty key")
+	}
+	tx := db.Delete(t)
 	return tx.Error
 }
 
