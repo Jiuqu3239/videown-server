@@ -30,6 +30,19 @@ func (v NftAPI) CreateVideoMetadata(c *gin.Context) {
 	resp.Ok(c, result)
 }
 
+func (v NftAPI) DeleteVideoMetadata(c *gin.Context) {
+	var hash string
+	if err := c.BindJSON(&hash); err != nil {
+		resp.Error(c, resp.NewErrorWraper(err, 500, "bind json data error"))
+		return
+	}
+	if err := nft.DeleteVideoMetadata(hash); err != nil {
+		resp.Error(c, resp.NewErrorWraper(err, 500, "delete video metadata service error"))
+		return
+	}
+	resp.Ok(c, hash)
+}
+
 func (n NftAPI) QueryActivities(c *gin.Context) {
 	var querier dto.Querier
 	err := c.BindJSON(&querier)

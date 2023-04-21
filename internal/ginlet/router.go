@@ -76,6 +76,7 @@ func registerEndpointsForNFT(router *gin.Engine) {
 		g.PUT("/change/status/:act", n.ChangeSellingStatus)
 		g.PUT("/change/price/:act", n.ChangeSellingPrice)
 		g.PUT("/activity/list", n.QueryActivities)
+		g.PUT("/delete", n.DeleteVideoMetadata)
 	}
 }
 

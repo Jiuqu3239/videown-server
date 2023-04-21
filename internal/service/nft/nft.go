@@ -90,6 +90,21 @@ func CreateVideoMetadata(req dto.CreateReq) (dto.CreateResp, error) {
 	return res, nil
 }
 
+func DeleteVideoMetadata(filehash string) error {
+	//check metadata is exsited
+	v := &model.VideoMetadata{FileHash: filehash}
+	if yes, _ := v.IsExist(global.GormDb); !yes {
+		return errors.New("video metadata is not exist")
+	}
+	if res,err:=v.Get(global.GormDb);err==nil&&len(res)>0{
+		v=&res[0]
+	}
+	if v.NftStatus!=model.CREATE.String(){
+		return errors.New("video nft has been minted")
+	}
+	return v.Delete(global.GormDb)
+}
+
 func UpdateForMint(filehash string, data TxData) (dto.EventResp, error) {
 	//check:once only
 	var res dto.EventResp
