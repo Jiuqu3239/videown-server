@@ -31,16 +31,18 @@ func (v NftAPI) CreateVideoMetadata(c *gin.Context) {
 }
 
 func (v NftAPI) DeleteVideoMetadata(c *gin.Context) {
-	var hash string
+	var hash struct {
+		FileHash string `json:"fileHash"`
+	}
 	if err := c.BindJSON(&hash); err != nil {
 		resp.Error(c, resp.NewErrorWraper(err, 500, "bind json data error"))
 		return
 	}
-	if err := nft.DeleteVideoMetadata(hash); err != nil {
+	if err := nft.DeleteVideoMetadata(hash.FileHash); err != nil {
 		resp.Error(c, resp.NewErrorWraper(err, 500, "delete video metadata service error"))
 		return
 	}
-	resp.Ok(c, hash)
+	resp.Ok(c, hash.FileHash)
 }
 
 func (n NftAPI) QueryActivities(c *gin.Context) {
